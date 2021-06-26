@@ -8,9 +8,9 @@ pub fn square_distance(z: &F64Pair) -> f64 {
     z.0 * z.0 + z.1 * z.1
 }
 
-pub fn iterations_before_escape(c: &F64Pair, max_iterations: &u8) -> u8 {
+pub fn iterations_before_escape(c: &F64Pair, max_iterations: &u16) -> u16 {
     let mut z = (0f64, 0f64);
-    let mut iterations = 0u8;
+    let mut iterations = 0u16;
 
     while (square_distance(&z) < 4f64) && (iterations < *max_iterations) {
         z = quadratic_map(&z, c);
