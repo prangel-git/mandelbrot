@@ -1,4 +1,5 @@
 extern crate image;
+extern crate colorous;
 
 type F64Pair = (f64, f64);
 
