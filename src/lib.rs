@@ -1,9 +1,10 @@
-extern crate image;
 extern crate colorous;
+extern crate image;
 
 type F64Pair = (f64, f64);
 
 pub mod frame;
+pub mod frames_generator;
 pub mod utils;
 
 #[cfg(test)]
