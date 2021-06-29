@@ -49,7 +49,7 @@ impl Iterator for FramesGenerator {
 
 fn convex_combination(x: F64Pair, y: F64Pair, alpha: f64) -> F64Pair {
     (
-        alpha * x.0 + (1f64 - alpha) * y.0,
-        alpha * x.1 + (1f64 - alpha) * y.1,
+        (1f64 - alpha) * x.0 + alpha * y.0,
+        (1f64 - alpha) * x.1 + alpha * y.1,
     )
 }

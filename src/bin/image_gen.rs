@@ -2,8 +2,8 @@ extern crate colorous;
 extern crate image;
 
 fn main() {
-    let x_length = 2400u32;
-    let y_length = 1600u32;
+    let x_length = 1200u32;
+    let y_length = 800u32;
 
     let left_botton = (-2.5f64, -1f64);
     let right_up = (1f64, 1f64);
