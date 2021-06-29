@@ -31,19 +31,25 @@ impl FramesGenerator {
     }
 }
 
-
 impl Iterator for FramesGenerator {
     type Item = Frame;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let frame = Frame::new(self.left_botton, self.right_up, self.x_length, self.y_length);
+        let frame = Frame::new(
+            self.left_botton,
+            self.right_up,
+            self.x_length,
+            self.y_length,
+        );
         self.left_botton = convex_combination(self.left_botton, self.center, self.speed);
         self.right_up = convex_combination(self.right_up, self.center, self.speed);
         return Some(frame);
     }
 }
 
-
 fn convex_combination(x: F64Pair, y: F64Pair, alpha: f64) -> F64Pair {
-    (alpha * x.0 + (1f64 - alpha) * y.0, alpha * x.1 + (1f64 - alpha) * y.1)
+    (
+        alpha * x.0 + (1f64 - alpha) * y.0,
+        alpha * x.1 + (1f64 - alpha) * y.1,
+    )
 }
