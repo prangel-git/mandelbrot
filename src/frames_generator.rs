@@ -3,8 +3,8 @@ use crate::F64Pair;
 use super::frame::Frame;
 
 pub struct FramesGenerator {
-    left_botton: F64Pair,
-    right_up: F64Pair,
+    pub left_botton: F64Pair,
+    pub right_up: F64Pair,
     x_length: u32,
     y_length: u32,
     center: F64Pair,
