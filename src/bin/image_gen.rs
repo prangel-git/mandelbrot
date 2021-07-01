@@ -33,7 +33,7 @@ fn main() {
 
         let img = image::ImageBuffer::from_fn(x_length, y_length, |x, y| {
             let c = frame.coordinates_to_value(x, y);
-            let value = mandelbrot::utils::iterations_before_escape(&c, &1000u16);
+            let value = mandelbrot::mandelbrot::iterations_before_escape(&c, &1000u16);
             let index = (value as f64 / 100f64).powf(1f64);
             let colorous::Color { r, g, b } = colorous::TURBO.eval_continuous(index);
             image::Rgba([r, g, b, 255u8])
