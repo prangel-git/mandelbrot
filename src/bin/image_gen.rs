@@ -12,7 +12,8 @@ fn main() {
     let left_botton = (-2.5f64, -1f64);
     let right_up = (1f64, 1f64);
 
-    let center = (1f64.exp() / 7f64, -1f64.exp() / 20f64);
+    let center = (0.824799480351573f64 / 2f64, -1.21271376883179f64 / 2f64);
+    // let center = (1f64.exp() / 7f64, -1f64.exp() / 20f64);
     let speed = 0.1f64;
 
     let mut frames_generator =
@@ -22,15 +23,16 @@ fn main() {
 
     let mut encoder = GifEncoder::new(file_out);
 
-    let max_iterations = 1000u16;
+    let max_iterations = 5000u16;
+    let hue_type = mandelbrot::HueTypes::STANDARD;
 
     for k in 0..80 {
         let frame = frames_generator.next().unwrap();
 
-        let image_generator = mandelbrot::ImageGenerator::new(&frame, max_iterations);
+        let image_generator = mandelbrot::ImageGenerator::new(&frame, max_iterations, &hue_type);
 
         let img = image::ImageBuffer::from_fn(width, height, |x, y| {
-            let index = image_generator.eval(x, y);
+            let index = image_generator.eval(x, y).powf(0.2f64);
             let colorous::Color { r, g, b } = colorous::TURBO.eval_continuous(index);
             image::Rgba([r, g, b, 255u8])
         });
