@@ -23,16 +23,16 @@ fn main() {
 
     let mut encoder = GifEncoder::new(file_out);
 
-    let max_iterations = 5000u16;
+    let max_iterations = 10000u16;
     let hue_type = mandelbrot::HueTypes::STANDARD;
 
-    for k in 0..80 {
+    for k in 0..100 {
         let frame = frames_generator.next().unwrap();
 
         let image_generator = mandelbrot::ImageGenerator::new(&frame, max_iterations, &hue_type);
 
         let img = image::ImageBuffer::from_fn(width, height, |x, y| {
-            let index = image_generator.eval(x, y).powf(0.2f64);
+            let index = image_generator.eval(x, y).powf(0.5f64);
             let colorous::Color { r, g, b } = colorous::TURBO.eval_continuous(index);
             image::Rgba([r, g, b, 255u8])
         });
