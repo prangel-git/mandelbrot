@@ -6,8 +6,8 @@ extern crate colorous;
 extern crate image;
 
 fn main() {
-    let x_length = 600u32;
-    let y_length = 400u32;
+    let width = 600u32;
+    let height = 400u32;
 
     let left_botton = (-2.5f64, -1f64);
     let right_up = (1f64, 1f64);
@@ -16,19 +16,21 @@ fn main() {
     let speed = 0.1f64;
 
     let mut frames_generator =
-        mandelbrot::FramesGenerator::new(left_botton, right_up, x_length, y_length, center, speed);
+        mandelbrot::FramesGenerator::new(left_botton, right_up, width, height, center, speed);
 
     let file_out = File::create("fractal.gif").unwrap();
 
     let mut encoder = GifEncoder::new(file_out);
 
+    let max_iterations = 1000u16;
+
     for k in 0..80 {
         let frame = frames_generator.next().unwrap();
 
-        let img = image::ImageBuffer::from_fn(x_length, y_length, |x, y| {
-            let c = frame.coordinates_to_value(x, y);
-            let value = mandelbrot::iterations_before_escape(&c, &1000u16);
-            let index = (value as f64 / 100f64).powf(1f64);
+        let image_generator = mandelbrot::ImageGenerator::new(&frame, max_iterations);
+
+        let img = image::ImageBuffer::from_fn(width, height, |x, y| {
+            let index = image_generator.eval(x, y);
             let colorous::Color { r, g, b } = colorous::TURBO.eval_continuous(index);
             image::Rgba([r, g, b, 255u8])
         });

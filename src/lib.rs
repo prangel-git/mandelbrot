@@ -14,6 +14,9 @@ mod escape_time;
 pub use escape_time::iterations_before_escape;
 pub use escape_time::iterations_before_escape_optimize;
 
+mod image_generator;
+pub use image_generator::ImageGenerator;
+
 #[cfg(test)]
 mod tests {
     #[test]
