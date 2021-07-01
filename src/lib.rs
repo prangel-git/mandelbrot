@@ -4,9 +4,15 @@ extern crate rayon;
 
 type F64Pair = (f64, f64);
 
-pub mod frame;
-pub mod frames_generator;
-pub mod mandelbrot;
+mod frame;
+pub use frame::Frame;
+
+mod frames_generator;
+pub use frames_generator::FramesGenerator;
+
+mod escape_time;
+pub use escape_time::iterations_before_escape;
+pub use escape_time::iterations_before_escape_optimize;
 
 #[cfg(test)]
 mod tests {

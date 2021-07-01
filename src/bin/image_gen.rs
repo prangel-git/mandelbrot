@@ -15,14 +15,8 @@ fn main() {
     let center = (1f64.exp() / 7f64, -1f64.exp() / 20f64);
     let speed = 0.1f64;
 
-    let mut frames_generator = mandelbrot::frames_generator::FramesGenerator::new(
-        left_botton,
-        right_up,
-        x_length,
-        y_length,
-        center,
-        speed,
-    );
+    let mut frames_generator =
+        mandelbrot::FramesGenerator::new(left_botton, right_up, x_length, y_length, center, speed);
 
     let file_out = File::create("fractal.gif").unwrap();
 
@@ -33,7 +27,7 @@ fn main() {
 
         let img = image::ImageBuffer::from_fn(x_length, y_length, |x, y| {
             let c = frame.coordinates_to_value(x, y);
-            let value = mandelbrot::mandelbrot::iterations_before_escape(&c, &1000u16);
+            let value = mandelbrot::iterations_before_escape(&c, &1000u16);
             let index = (value as f64 / 100f64).powf(1f64);
             let colorous::Color { r, g, b } = colorous::TURBO.eval_continuous(index);
             image::Rgba([r, g, b, 255u8])
